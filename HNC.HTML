@@ -77,6 +77,11 @@
             0%, 100% { opacity: 1; }
             50% { opacity: .5; }
         }
+
+        .tab-button.active {
+            background-color: #3B82F6;
+            color: white;
+        }
     </style>
 </head>
 <body class="bg-acmilan flex items-center justify-center min-h-screen p-4">
@@ -109,16 +114,12 @@
 
         <div class="mt-8 space-y-5">
             <div>
-                <label id="subjectLabel" for="emailSubject" class="block text-sm font-semibold text-gray-800">Subjek Email</label>
-                <input type="text" id="emailSubject" class="mt-2 block w-full rounded-xl border-2 border-gray-300 shadow-sm p-3 focus:ring-blue-500 focus:border-blue-500 transition-all duration-300" placeholder="Contoh: Permintaan Penawaran, Pertanyaan Produk">
-            </div>
-            <div>
-                <label id="toLabel" for="emailTo" class="block text-sm font-semibold text-gray-800">Tujuan Email</label>
-                <input type="text" id="emailTo" class="mt-2 block w-full rounded-xl border-2 border-gray-300 shadow-sm p-3 focus:ring-blue-500 focus:border-blue-500 transition-all duration-300" placeholder="Kepada siapa email ini ditujukan? (Contoh: Bapak/Ibu Yth.)">
-            </div>
-            <div>
-                <label id="contentLabel" for="emailContent" class="block text-sm font-semibold text-gray-800">Konten Email</label>
+                <label id="contentLabel" for="emailContent" class="block text-sm font-semibold text-gray-800">Konten Email <span class="text-red-500 font-bold ml-1">*</span></label>
                 <textarea id="emailContent" rows="8" class="mt-2 block w-full rounded-xl border-2 border-gray-300 shadow-sm p-3 focus:ring-blue-500 focus:border-blue-500 transition-all duration-300" placeholder="Tempelkan email yang diterima di sini untuk dianalisis AI..."></textarea>
+            </div>
+            <div>
+                <label id="mindsetLabel" for="mindsetTextarea" class="block text-sm font-semibold text-gray-800">Instruksi Khusus untuk Balasan (Opsional)</label>
+                <textarea id="mindsetTextarea" rows="3" class="mt-2 block w-full rounded-xl border-2 border-gray-300 shadow-sm p-3 focus:ring-blue-500 focus:border-blue-500 transition-all duration-300" placeholder="Contoh: 'Buat balasannya dengan nada persuasif dan berikan penawaran khusus.'"></textarea>
             </div>
         </div>
 
@@ -133,16 +134,21 @@
                     Generating...
                 </div>
             </button>
-            <button id="copyBtn" class="flex-1 w-full px-6 py-4 border border-transparent text-base font-semibold rounded-full shadow-lg text-white bg-gray-600 hover:bg-gray-700 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-gray-500 transition-colors duration-300">
-                Salin Balasan
-            </button>
         </div>
         
         <div id="messageBox" class="mt-6 hidden p-4 rounded-xl text-sm text-white text-center font-medium"></div>
 
         <div id="outputContainer" class="mt-8 hidden">
-            <label id="replyLabel" for="generatedReply" class="block text-sm font-semibold text-gray-800">Balasan Email yang Dihasilkan</label>
-            <textarea id="generatedReply" rows="8" class="mt-2 block w-full rounded-xl border-2 border-gray-300 bg-gray-100 shadow-inner p-3 transition-all duration-300" readonly></textarea>
+            <label id="replyLabel" class="block text-sm font-semibold text-gray-800">Balasan Email yang Dihasilkan</label>
+            <div class="flex space-x-2 mt-2">
+                <button id="tab1" class="tab-button flex-1 px-4 py-2 rounded-xl text-sm font-medium border border-gray-300 transition-colors duration-200">Alternatif 1</button>
+                <button id="tab2" class="tab-button flex-1 px-4 py-2 rounded-xl text-sm font-medium border border-gray-300 transition-colors duration-200">Alternatif 2</button>
+                <button id="tab3" class="tab-button flex-1 px-4 py-2 rounded-xl text-sm font-medium border border-gray-300 transition-colors duration-200">Alternatif 3</button>
+            </div>
+            <textarea id="generatedReply" rows="8" class="mt-4 block w-full rounded-xl border-2 border-gray-300 bg-gray-100 shadow-inner p-3 transition-all duration-300" readonly></textarea>
+            <button id="copyBtn" class="w-full mt-4 px-6 py-4 border border-transparent text-base font-semibold rounded-full shadow-lg text-white bg-gray-600 hover:bg-gray-700 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-gray-500 transition-colors duration-300">
+                Salin Balasan
+            </button>
         </div>
 
     </div>
@@ -151,8 +157,7 @@
         const generateBtn = document.getElementById('generateBtn');
         const copyBtn = document.getElementById('copyBtn');
         const languageSelect = document.getElementById('languageSelect');
-        const emailSubjectInput = document.getElementById('emailSubject');
-        const emailToInput = document.getElementById('emailTo');
+        const mindsetTextarea = document.getElementById('mindsetTextarea');
         const emailContentTextarea = document.getElementById('emailContent');
         const generatedReplyTextarea = document.getElementById('generatedReply');
         const outputContainer = document.getElementById('outputContainer');
@@ -161,46 +166,50 @@
         const messageBox = document.getElementById('messageBox');
         const bodyElement = document.body;
         const logoElement = document.getElementById('logo');
+        const tabs = [document.getElementById('tab1'), document.getElementById('tab2'), document.getElementById('tab3')];
 
         let isHarjara = true;
         let isMilan = true;
+        let generatedReplies = [];
 
         const translations = {
             indonesian: {
-                appSubtitle: 'Reply Email Solution with AI Model',
-                subjectLabel: 'Subjek Email',
-                subjectPlaceholder: 'Contoh: Permintaan Penawaran, Pertanyaan Produk',
-                toLabel: 'Tujuan Email',
-                toPlaceholder: 'Kepada siapa email ini ditujukan? (Contoh: Bapak/Ibu Yth.)',
+                appSubtitle: 'Solusi Balasan Email dengan Model AI',
+                mindsetLabel: 'Instruksi Khusus untuk Balasan (Opsional)',
+                mindsetPlaceholder: 'Contoh: "Buat balasannya dengan nada persuasif dan berikan penawaran khusus."',
                 contentLabel: 'Konten Email',
                 contentPlaceholder: 'Tempelkan email yang diterima di sini untuk dianalisis AI...',
                 generateButton: 'Generate Balasan',
                 copyButton: 'Salin Balasan',
                 replyLabel: 'Balasan Email yang Dihasilkan',
+                tab1: 'Alternatif 1',
+                tab2: 'Alternatif 2',
+                tab3: 'Alternatif 3',
                 loading: 'Generating...',
                 messageSuccess: 'Balasan email berhasil dibuat!',
                 messageCopied: 'Balasan disalin ke clipboard!',
                 messageEmpty: 'Tidak ada balasan untuk disalin.',
-                messageError: 'Harap isi semua bidang: Subjek Email, Tujuan, dan Konten.',
+                messageError: 'Mohon isi kolom Konten Email untuk memulai.',
                 messageApiError: 'Gagal menghasilkan balasan. Mohon coba lagi.',
                 messageServerError: 'Terjadi kesalahan saat menghubungi server. Mohon coba lagi.'
             },
             english: {
                 appSubtitle: 'AI Model Email Reply Solution',
-                subjectLabel: 'Email Subject',
-                subjectPlaceholder: 'Example: Quote Request, Product Inquiry',
-                toLabel: 'Recipient',
-                toPlaceholder: 'Who is this email for? (e.g., Dear Mr./Ms.)',
+                mindsetLabel: 'Special Instructions for Reply (Optional)',
+                mindsetPlaceholder: 'Example: "Make the reply persuasive and include a special offer."',
                 contentLabel: 'Email Content',
                 contentPlaceholder: 'Paste the received email here for AI analysis...',
                 generateButton: 'Generate Reply',
                 copyButton: 'Copy Reply',
                 replyLabel: 'Generated Email Reply',
+                tab1: 'Alternative 1',
+                tab2: 'Alternative 2',
+                tab3: 'Alternative 3',
                 loading: 'Generating...',
                 messageSuccess: 'Email reply generated successfully!',
                 messageCopied: 'Reply copied to clipboard!',
                 messageEmpty: 'No reply to copy.',
-                messageError: 'Please fill in all fields: Subject, Recipient, and Content.',
+                messageError: 'Please fill in the Email Content field to get started.',
                 messageApiError: 'Failed to generate a reply. Please try again.',
                 messageServerError: 'An error occurred while contacting the server. Please try again.'
             }
@@ -210,15 +219,16 @@
         function updateUI(lang) {
             const t = translations[lang];
             document.getElementById('appSubtitle').textContent = t.appSubtitle;
-            document.getElementById('subjectLabel').textContent = t.subjectLabel;
-            emailSubjectInput.placeholder = t.subjectPlaceholder;
-            document.getElementById('toLabel').textContent = t.toLabel;
-            emailToInput.placeholder = t.toPlaceholder;
-            document.getElementById('contentLabel').textContent = t.contentLabel;
+            document.getElementById('mindsetLabel').textContent = t.mindsetLabel;
+            mindsetTextarea.placeholder = t.mindsetPlaceholder;
+            document.getElementById('contentLabel').innerHTML = `${t.contentLabel} <span class="text-red-500 font-bold ml-1">*</span>`;
             emailContentTextarea.placeholder = t.contentPlaceholder;
             document.getElementById('buttonText').textContent = t.generateButton;
             document.getElementById('copyBtn').textContent = t.copyButton;
             document.getElementById('replyLabel').textContent = t.replyLabel;
+            tabs[0].textContent = t.tab1;
+            tabs[1].textContent = t.tab2;
+            tabs[2].textContent = t.tab3;
         }
 
         // Initial UI update
@@ -274,14 +284,24 @@
             }
         }
 
+        // Tab click event
+        tabs.forEach((tab, index) => {
+            tab.addEventListener('click', () => {
+                if (generatedReplies.length > index) {
+                    tabs.forEach(t => t.classList.remove('active', 'bg-blue-600', 'text-white', 'text-gray-700'));
+                    tab.classList.add('active', 'bg-blue-600', 'text-white');
+                    generatedReplyTextarea.value = generatedReplies[index];
+                }
+            });
+        });
+
         // Generate button click event
         generateBtn.addEventListener('click', async () => {
-            const subject = emailSubjectInput.value;
-            const to = emailToInput.value;
             const content = emailContentTextarea.value;
             const language = languageSelect.value;
+            const additionalInstructions = mindsetTextarea.value.trim();
 
-            if (!subject || !to || !content) {
+            if (!content) {
                 showMessage('messageError', true);
                 return;
             }
@@ -290,21 +310,19 @@
             loadingIndicator.classList.remove('hidden');
             generateBtn.disabled = true;
 
-            let prompt;
-            if (language === 'english') {
-                prompt = `Please provide a very polite, professional, and elegant email reply in English.
-Email subject: ${subject}
-Email recipient: ${to}
-Email content: ${content}`;
+            let promptBase;
+            if (additionalInstructions) {
+                promptBase = language === 'english'
+                    ? `Generate 3 distinct email replies in English based on the following content and instructions. Instructions: ${additionalInstructions}. Ensure the replies are direct and concise, and present each one as a separate paragraph without any introductory text.`
+                    : `Hasilkan 3 balasan email yang berbeda dan terpisah dalam Bahasa Indonesia berdasarkan konten berikut dan instruksi tambahan. Instruksi: ${additionalInstructions}. Pastikan balasannya ringkas dan langsung, dan sajikan setiap balasan sebagai paragraf terpisah tanpa teks pengantar.`;
             } else {
-                prompt = `Berikan balasan email yang sangat sopan, profesional, dan elegan dalam Bahasa Indonesia.
-Subjek email: ${subject}
-Tujuan email: ${to}
-Isi email: ${content}`;
+                promptBase = language === 'english'
+                    ? `Generate 3 distinct email replies in English based on the following content. Ensure the replies are direct and concise, and present each one as a separate paragraph without any introductory text.`
+                    : `Hasilkan 3 balasan email yang berbeda dan terpisah dalam Bahasa Indonesia berdasarkan konten berikut. Pastikan balasannya ringkas dan langsung, dan sajikan setiap balasan sebagai paragraf terpisah tanpa teks pengantar.`;
             }
-
+            
             const payload = {
-                contents: [{ parts: [{ text: prompt }] }],
+                contents: [{ parts: [{ text: `${promptBase}\n\n${content}` }] }],
             };
 
             const apiKey = "";
@@ -330,7 +348,12 @@ Isi email: ${content}`;
                     const generatedText = result?.candidates?.[0]?.content?.parts?.[0]?.text;
 
                     if (generatedText) {
-                        generatedReplyTextarea.value = generatedText;
+                        generatedReplies = generatedText.split(/\r?\n\s*\r?\n/).filter(text => text.trim() !== '');
+                        if (generatedReplies.length > 0) {
+                            tabs.forEach((tab, index) => tab.style.display = 'block');
+                            generatedReplyTextarea.value = generatedReplies[0];
+                            tabs[0].click();
+                        }
                         outputContainer.classList.remove('hidden');
                         showMessage('messageSuccess');
                         rotateBackgroundAndLogo();
