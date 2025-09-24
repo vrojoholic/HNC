@@ -23,14 +23,14 @@
         }
 
         .bg-acmilan {
-            background-image: linear-gradient(to right, rgba(0, 0, 0, 0.7), rgba(0, 0, 0, 0.7)), url('1618363661269.jpeg');
+            background-image: linear-gradient(to right, rgba(0, 0, 0, 0.5), rgba(0, 0, 0, 0.5)), url('1618363661269.jpeg');
         }
         .text-acmilan {
             color: #E20021;
         }
 
         .bg-liverpool {
-            background-image: linear-gradient(to right, rgba(0, 0, 0, 0.7), rgba(0, 0, 0, 0.7)), url('499267819_18506217601053893_7515771928710394199_n.jpg');
+            background-image: linear-gradient(to right, rgba(0, 0, 0, 0.5), rgba(0, 0, 0, 0.5)), url('499267819_18506217601053893_7515771928710394199_n.jpg');
         }
         .text-liverpool {
             color: #C8102E;
@@ -313,24 +313,14 @@
             generateBtn.disabled = true;
 
             let promptBase;
-            const introText = language === 'english'
-                ? `Here are 3 distinct email replies based on your email and instructions. Please choose the best one.
-                
-Alternative 1:
-`
-                : `Berikut adalah 3 balasan email yang berbeda berdasarkan email dan instruksi Anda. Silakan pilih yang terbaik.
-
-Alternatif 1:
-`;
-            
             if (additionalInstructions) {
                 promptBase = language === 'english'
-                    ? `Generate 3 distinct email replies in English based on the following content and instructions. Instructions: ${additionalInstructions}. Ensure the replies are direct and concise, and present each one as a separate paragraph without any introductory text. Use "---" as a delimiter between each reply.`
-                    : `Hasilkan 3 balasan email yang berbeda dan terpisah dalam Bahasa Indonesia berdasarkan konten berikut dan instruksi tambahan. Instruksi: ${additionalInstructions}. Pastikan balasannya ringkas dan langsung, dan sajikan setiap balasan sebagai paragraf terpisah tanpa teks pengantar. Gunakan "---" sebagai pemisah antara setiap balasan.`;
+                    ? `Generate 3 distinct email replies in English based on the following content and instructions. Instructions: ${additionalInstructions}. Ensure the replies are direct and concise, and present each one as a separate paragraph. Do not include any introductory or concluding text. Separate each reply with '---'.`
+                    : `Hasilkan 3 balasan email yang berbeda dan terpisah dalam Bahasa Indonesia berdasarkan konten berikut dan instruksi tambahan. Instruksi: ${additionalInstructions}. Pastikan balasannya ringkas dan langsung, dan sajikan setiap balasan sebagai paragraf terpisah. Jangan sertakan teks pengantar atau penutup apa pun. Pisahkan setiap balasan dengan '---'.`;
             } else {
                 promptBase = language === 'english'
-                    ? `Generate 3 distinct email replies in English based on the following content. Ensure the replies are direct and concise, and present each one as a separate paragraph without any introductory text. Use "---" as a delimiter between each reply.`
-                    : `Hasilkan 3 balasan email yang berbeda dan terpisah dalam Bahasa Indonesia berdasarkan konten berikut. Pastikan balasannya ringkas dan langsung, dan sajikan setiap balasan sebagai paragraf terpisah tanpa teks pengantar. Gunakan "---" sebagai pemisah antara setiap balasan.`;
+                    ? `Generate 3 distinct email replies in English based on the following content. Ensure the replies are direct and concise, and present each one as a separate paragraph. Do not include any introductory or concluding text. Separate each reply with '---'.`
+                    : `Hasilkan 3 balasan email yang berbeda dan terpisah dalam Bahasa Indonesia berdasarkan konten berikut. Pastikan balasannya ringkas dan langsung, dan sajikan setiap balasan sebagai paragraf terpisah. Jangan sertakan teks pengantar atau penutup apa pun. Pisahkan setiap balasan dengan '---'.`;
             }
             
             const payload = {
