@@ -191,7 +191,8 @@
                 messageEmpty: 'Tidak ada balasan untuk disalin.',
                 messageError: 'Mohon isi kolom Konten Email untuk memulai.',
                 messageApiError: 'Gagal menghasilkan balasan. Mohon coba lagi.',
-                messageServerError: 'Terjadi kesalahan saat menghubungi server. Mohon coba lagi.'
+                messageServerError: 'Terjadi kesalahan saat menghubungi server. Mohon coba lagi.',
+                messageInvalidKey: 'Kunci API tidak valid. Harap periksa kunci API Anda.'
             },
             english: {
                 appSubtitle: 'AI Model Email Reply Solution',
@@ -211,7 +212,8 @@
                 messageEmpty: 'No reply to copy.',
                 messageError: 'Please fill in the Email Content field to get started.',
                 messageApiError: 'Failed to generate a reply. Please try again.',
-                messageServerError: 'An error occurred while contacting the server. Please try again.'
+                messageServerError: 'An error occurred while contacting the server. Please try again.',
+                messageInvalidKey: 'Invalid API key. Please check your API key.'
             }
         };
 
@@ -252,7 +254,6 @@
 
         // Function to handle image and color rotation
         function rotateBackgroundAndLogo() {
-            // Rotate background image
             if (isHarjara) {
                 bodyElement.classList.remove('bg-acmilan');
                 bodyElement.classList.add('bg-liverpool');
@@ -263,22 +264,21 @@
                 isHarjara = true;
             }
 
-            // Change logo colors
             const logoPaths = logoElement.querySelectorAll('path, circle');
             if (isMilan) {
                 logoPaths.forEach(path => {
                     if (path.tagName === 'circle') {
-                        path.setAttribute('fill', '#C8102E'); // Liverpool red
+                        path.setAttribute('fill', '#C8102E');
                     }
-                    path.setAttribute('stroke', '#FFF'); // Liverpool white
+                    path.setAttribute('stroke', '#FFF');
                 });
                 isMilan = false;
             } else {
                 logoPaths.forEach(path => {
                     if (path.tagName === 'circle') {
-                        path.setAttribute('fill', '#E20021'); // AC Milan red
+                        path.setAttribute('fill', '#E20021');
                     }
-                    path.setAttribute('stroke', '#1F2937'); // AC Milan black
+                    path.setAttribute('stroke', '#1F2937');
                 });
                 isMilan = true;
             }
@@ -341,6 +341,14 @@
                         headers: { 'Content-Type': 'application/json' },
                         body: JSON.stringify(payload)
                     });
+
+                    if (response.status === 400 || response.status === 403) {
+                         const errorData = await response.json();
+                         if (errorData.error && errorData.error.message.includes('API key')) {
+                             showMessage('messageInvalidKey', true);
+                             return;
+                         }
+                    }
 
                     if (!response.ok) {
                         throw new Error(`HTTP error! status: ${response.status}`);
