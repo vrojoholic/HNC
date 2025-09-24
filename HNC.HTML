@@ -111,6 +111,11 @@
             <h1 class="text-5xl font-extrabold text-center text-gray-900 leading-tight title-font">H&C East Power</h1>
             <p id="appSubtitle" class="mt-2 text-xl font-medium text-center text-gray-700">Reply Email Solution with AI Model</p>
         </div>
+        
+        <!-- Peringatan untuk hosting GitHub -->
+        <div id="hostingWarning" class="mt-4 p-4 text-sm rounded-xl text-center bg-yellow-100 text-yellow-800 border border-yellow-300 hidden">
+            <p><strong>Peringatan:</strong> Aplikasi ini mungkin tidak berfungsi di GitHub Pages atau layanan hosting statis lainnya karena masalah CORS (Cross-Origin Resource Sharing). Untuk solusi permanen, gunakan backend proxy.</p>
+        </div>
 
         <div class="mt-8 space-y-5">
             <div>
@@ -167,6 +172,7 @@
         const bodyElement = document.body;
         const logoElement = document.getElementById('logo');
         const tabs = [document.getElementById('tab1'), document.getElementById('tab2'), document.getElementById('tab3')];
+        const hostingWarning = document.getElementById('hostingWarning');
 
         let isHarjara = true;
         let isMilan = true;
@@ -192,7 +198,8 @@
                 messageError: 'Mohon isi kolom Konten Email untuk memulai.',
                 messageApiError: 'Gagal menghasilkan balasan. Mohon coba lagi.',
                 messageServerError: 'Terjadi kesalahan saat menghubungi server. Mohon coba lagi.',
-                messageInvalidKey: 'Kunci API tidak valid. Harap periksa kunci API Anda.'
+                messageInvalidKey: 'Kunci API tidak valid. Harap periksa kunci API Anda.',
+                messageCorsError: 'Permintaan diblokir. Untuk hosting di platform seperti GitHub, diperlukan backend server proxy untuk menghindari masalah CORS.'
             },
             english: {
                 appSubtitle: 'AI Model Email Reply Solution',
@@ -213,7 +220,8 @@
                 messageError: 'Please fill in the Email Content field to get started.',
                 messageApiError: 'Failed to generate a reply. Please try again.',
                 messageServerError: 'An error occurred while contacting the server. Please try again.',
-                messageInvalidKey: 'Invalid API key. Please check your API key.'
+                messageInvalidKey: 'Invalid API key. Please check your API key.',
+                messageCorsError: 'The request was blocked. For hosting on platforms like GitHub, a backend proxy server is required to avoid CORS issues.'
             }
         };
 
@@ -249,7 +257,7 @@
             messageBox.classList.remove('hidden');
             setTimeout(() => {
                 messageBox.classList.add('hidden');
-            }, 3000);
+            }, 5000);
         }
 
         // Function to handle image and color rotation
@@ -327,7 +335,9 @@
                 contents: [{ parts: [{ text: `${promptBase}\n\n${content}` }] }],
             };
             
-            const apiKey = "AIzaSyAOd2aALgDq7oN4vape_AJSLqo9sbwDNj0";
+            // Masukkan kunci API Anda di sini jika meng-hosting file sendiri
+            // Untuk Canvas, biarkan string kosong seperti ini.
+            const apiKey = "AIzaSyAOd2aALgDq7oN4vape_AJSLqo9sbwDNj0"; // GANTI DENGAN KUNCI API ANDA!
             const apiUrl = `https://generativelanguage.googleapis.com/v1beta/models/gemini-2.5-flash-preview-05-20:generateContent?key=${apiKey}`;
 
             let retryCount = 0;
@@ -373,7 +383,11 @@
                     }
                 } catch (error) {
                     console.error('API call failed:', error);
-                    if (retryCount < maxRetries) {
+                    // Handle CORS error specifically
+                    if (error.message.includes('Failed to fetch')) {
+                        showMessage('messageCorsError', true);
+                        hostingWarning.classList.remove('hidden');
+                    } else if (retryCount < maxRetries) {
                         retryCount++;
                         setTimeout(() => makeApiCall(), delay * Math.pow(2, retryCount));
                     } else {
@@ -403,4 +417,3 @@
     </script>
 </body>
 </html>
-
