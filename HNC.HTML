@@ -3,7 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>AI H&C East Power Reply Email Solution</title>
+    <title>H&C East Power Reply Email Solution</title>
     <script src="https://cdn.tailwindcss.com"></script>
     <style>
         @import url('https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap');
@@ -324,8 +324,9 @@
             const payload = {
                 contents: [{ parts: [{ text: `${promptBase}\n\n${content}` }] }],
             };
-
-            const apiKey = "";
+            
+            // Masukkan kunci API Anda di sini jika meng-hosting file sendiri
+            const apiKey = AIzaSyAOd2aALgDq7oN4vape_AJSLqo9sbwDNj0;
             const apiUrl = `https://generativelanguage.googleapis.com/v1beta/models/gemini-2.5-flash-preview-05-20:generateContent?key=${apiKey}`;
 
             let retryCount = 0;
