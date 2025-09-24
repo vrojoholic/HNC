@@ -1,396 +1,396 @@
 <!DOCTYPE html>
 <html lang="id">
 <head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>H&C East Power Reply Email Solution</title>
-    <script src="https://cdn.tailwindcss.com"></script>
-    <style>
-        @import url('https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap');
-        @font-face {
-            font-family: 'HarryPotter';
-            src: url('https://fonts.cdnfonts.com/s/7289/Hogwarts-Wizard.woff') format('woff');
-        }
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>H&C East Power Reply Email Solution</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <style>
+        @import url('https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap');
+        @font-face {
+            font-family: 'HarryPotter';
+            src: url('https://fonts.cdnfonts.com/s/7289/Hogwarts-Wizard.woff') format('woff');
+        }
 
-        body {
-            font-family: 'Inter', sans-serif;
-            transition: background-image 1s ease-in-out;
-            background-size: cover;
-            background-position: center;
-            background-repeat: no-repeat;
-            background-attachment: fixed;
-            color: #333;
-        }
+        body {
+            font-family: 'Inter', sans-serif;
+            transition: background-image 1s ease-in-out;
+            background-size: cover;
+            background-position: center;
+            background-repeat: no-repeat;
+            background-attachment: fixed;
+            color: #333;
+        }
 
-        .bg-acmilan {
-            background-image: linear-gradient(to right, rgba(0, 0, 0, 0.7), rgba(0, 0, 0, 0.7)), url('1618363661269.jpeg');
-        }
-        .text-acmilan {
-            color: #E20021;
-        }
+        .bg-acmilan {
+            background-image: linear-gradient(to right, rgba(0, 0, 0, 0.7), rgba(0, 0, 0, 0.7)), url('1618363661269.jpeg');
+        }
+        .text-acmilan {
+            color: #E20021;
+        }
 
-        .bg-liverpool {
-            background-image: linear-gradient(to right, rgba(0, 0, 0, 0.7), rgba(0, 0, 0, 0.7)), url('499267819_18506217601053893_7515771928710394199_n.jpg');
-        }
-        .text-liverpool {
-            color: #C8102E;
-        }
+        .bg-liverpool {
+            background-image: linear-gradient(to right, rgba(0, 0, 0, 0.7), rgba(0, 0, 0, 0.7)), url('499267819_18506217601053893_7515771928710394199_n.jpg');
+        }
+        .text-liverpool {
+            color: #C8102E;
+        }
 
-        .title-font {
-            font-family: 'HarryPotter', sans-serif;
-            letter-spacing: 2px;
-            text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.5);
-        }
+        .title-font {
+            font-family: 'HarryPotter', sans-serif;
+            letter-spacing: 2px;
+            text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.5);
+        }
 
-        .card {
-            backdrop-filter: blur(15px) brightness(1.1);
-            background-color: rgba(255, 255, 255, 0.75);
-            animation: fadeIn 1s ease-in-out;
-        }
+        .card {
+            backdrop-filter: blur(15px) brightness(1.1);
+            background-color: rgba(255, 255, 255, 0.75);
+            animation: fadeIn 1s ease-in-out;
+        }
 
-        @keyframes fadeIn {
-            from { opacity: 0; transform: translateY(20px); }
-            to { opacity: 1; transform: translateY(0); }
-        }
+        @keyframes fadeIn {
+            from { opacity: 0; transform: translateY(20px); }
+            to { opacity: 1; transform: translateY(0); }
+        }
 
-        /* Custom scrollbar */
-        textarea::-webkit-scrollbar {
-            width: 8px;
-        }
+        /* Custom scrollbar */
+        textarea::-webkit-scrollbar {
+            width: 8px;
+        }
 
-        textarea::-webkit-scrollbar-track {
-            background: rgba(0, 0, 0, 0.1);
-            border-radius: 10px;
-        }
+        textarea::-webkit-scrollbar-track {
+            background: rgba(0, 0, 0, 0.1);
+            border-radius: 10px;
+        }
 
-        textarea::-webkit-scrollbar-thumb {
-            background-color: rgba(0, 0, 0, 0.2);
-            border-radius: 10px;
-            border: 2px solid transparent;
-            background-clip: padding-box;
-        }
+        textarea::-webkit-scrollbar-thumb {
+            background-color: rgba(0, 0, 0, 0.2);
+            border-radius: 10px;
+            border: 2px solid transparent;
+            background-clip: padding-box;
+        }
 
-        .pulse {
-            animation: pulse 2s cubic-bezier(0.4, 0, 0.6, 1) infinite;
-        }
-        @keyframes pulse {
-            0%, 100% { opacity: 1; }
-            50% { opacity: .5; }
-        }
+        .pulse {
+            animation: pulse 2s cubic-bezier(0.4, 0, 0.6, 1) infinite;
+        }
+        @keyframes pulse {
+            0%, 100% { opacity: 1; }
+            50% { opacity: .5; }
+        }
 
-        .tab-button.active {
-            background-color: #3B82F6;
-            color: white;
-        }
-    </style>
+        .tab-button.active {
+            background-color: #3B82F6;
+            color: white;
+        }
+    </style>
 </head>
 <body class="bg-acmilan flex items-center justify-center min-h-screen p-4">
 
-    <div id="app-container" class="w-full max-w-2xl mx-auto my-auto p-8 rounded-2xl shadow-lg card relative">
-        <div class="absolute top-4 right-4">
-            <select id="languageSelect" class="bg-transparent border-none text-gray-800 font-semibold p-2 rounded-xl focus:outline-none">
-                <option value="indonesian">ID</option>
-                <option value="english">EN</option>
-            </select>
-        </div>
-        <div class="flex flex-col items-center">
-            <svg id="logo" class="w-24 h-24 mb-4" viewBox="0 0 100 100" fill="none" xmlns="http://www.w3.org/2000/svg">
-                <!-- Outer circle -->
-                <circle cx="50" cy="50" r="45" fill="#E20021" stroke="#1F2937" stroke-width="5"/>
-                
-                <!-- H letter -->
-                <path d="M25 40 L25 60 M25 50 L45 50 M45 40 L45 60" stroke="#1F2937" stroke-width="5" stroke-linecap="round"/>
-                
-                <!-- & symbol -->
-                <path d="M55 45 Q 60 40, 65 45 Q 70 50, 65 55 Q 60 60, 55 55" stroke="#1F2937" stroke-width="5" stroke-linecap="round"/>
-                
-                <!-- C letter -->
-                <path d="M75 60 C 85 50, 85 40, 75 40" stroke="#1F2937" stroke-width="5" stroke-linecap="round"/>
-            </svg>
+    <div id="app-container" class="w-full max-w-2xl mx-auto my-auto p-8 rounded-2xl shadow-lg card relative">
+        <div class="absolute top-4 right-4">
+            <select id="languageSelect" class="bg-transparent border-none text-gray-800 font-semibold p-2 rounded-xl focus:outline-none">
+                <option value="indonesian">ID</option>
+                <option value="english">EN</option>
+            </select>
+        </div>
+        <div class="flex flex-col items-center">
+            <svg id="logo" class="w-24 h-24 mb-4" viewBox="0 0 100 100" fill="none" xmlns="http://www.w3.org/2000/svg">
+                <!-- Outer circle -->
+                <circle cx="50" cy="50" r="45" fill="#E20021" stroke="#1F2937" stroke-width="5"/>
+                
+                <!-- H letter -->
+                <path d="M25 40 L25 60 M25 50 L45 50 M45 40 L45 60" stroke="#1F2937" stroke-width="5" stroke-linecap="round"/>
+                
+                <!-- & symbol -->
+                <path d="M55 45 Q 60 40, 65 45 Q 70 50, 65 55 Q 60 60, 55 55" stroke="#1F2937" stroke-width="5" stroke-linecap="round"/>
+                
+                <!-- C letter -->
+                <path d="M75 60 C 85 50, 85 40, 75 40" stroke="#1F2937" stroke-width="5" stroke-linecap="round"/>
+            </svg>
 
-            <h1 class="text-5xl font-extrabold text-center text-gray-900 leading-tight title-font">H&C East Power</h1>
-            <p id="appSubtitle" class="mt-2 text-xl font-medium text-center text-gray-700">Reply Email Solution with AI Model</p>
-        </div>
+            <h1 class="text-5xl font-extrabold text-center text-gray-900 leading-tight title-font">H&C East Power</h1>
+            <p id="appSubtitle" class="mt-2 text-xl font-medium text-center text-gray-700">Reply Email Solution with AI Model</p>
+        </div>
 
-        <div class="mt-8 space-y-5">
-            <div>
-                <label id="contentLabel" for="emailContent" class="block text-sm font-semibold text-gray-800">Konten Email <span class="text-red-500 font-bold ml-1">*</span></label>
-                <textarea id="emailContent" rows="8" class="mt-2 block w-full rounded-xl border-2 border-gray-300 shadow-sm p-3 focus:ring-blue-500 focus:border-blue-500 transition-all duration-300" placeholder="Tempelkan email yang diterima di sini untuk dianalisis AI..."></textarea>
-            </div>
-            <div>
-                <label id="mindsetLabel" for="mindsetTextarea" class="block text-sm font-semibold text-gray-800">Instruksi Khusus untuk Balasan (Opsional)</label>
-                <textarea id="mindsetTextarea" rows="3" class="mt-2 block w-full rounded-xl border-2 border-gray-300 shadow-sm p-3 focus:ring-blue-500 focus:border-blue-500 transition-all duration-300" placeholder="Contoh: 'Buat balasannya dengan nada persuasif dan berikan penawaran khusus.'"></textarea>
-            </div>
-        </div>
+        <div class="mt-8 space-y-5">
+            <div>
+                <label id="contentLabel" for="emailContent" class="block text-sm font-semibold text-gray-800">Konten Email <span class="text-red-500 font-bold ml-1">*</span></label>
+                <textarea id="emailContent" rows="8" class="mt-2 block w-full rounded-xl border-2 border-gray-300 shadow-sm p-3 focus:ring-blue-500 focus:border-blue-500 transition-all duration-300" placeholder="Tempelkan email yang diterima di sini untuk dianalisis AI..."></textarea>
+            </div>
+            <div>
+                <label id="mindsetLabel" for="mindsetTextarea" class="block text-sm font-semibold text-gray-800">Instruksi Khusus untuk Balasan (Opsional)</label>
+                <textarea id="mindsetTextarea" rows="3" class="mt-2 block w-full rounded-xl border-2 border-gray-300 shadow-sm p-3 focus:ring-blue-500 focus:border-blue-500 transition-all duration-300" placeholder="Contoh: 'Buat balasannya dengan nada persuasif dan berikan penawaran khusus.'"></textarea>
+            </div>
+        </div>
 
-        <div class="mt-8 flex flex-col sm:flex-row space-y-4 sm:space-y-0 sm:space-x-4">
-            <button id="generateBtn" class="flex-1 w-full px-6 py-4 border border-transparent text-base font-semibold rounded-full shadow-lg text-white bg-blue-600 hover:bg-blue-700 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-blue-500 transition-colors duration-300">
-                <span id="buttonText">Generate Balasan</span>
-                <div id="loadingIndicator" class="hidden flex items-center justify-center">
-                    <svg class="animate-spin h-5 w-5 text-white mr-3" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24">
-                        <circle class="opacity-25" cx="12" cy="12" r="10" stroke="currentColor" stroke-width="4"></circle>
-                        <path class="opacity-75" fill="currentColor" d="M4 12a8 8 0 018-8V0C5.373 0 0 5.373 0 12h4zm2 5.291A7.962 7.962 0 014 12H0c0 3.042 1.135 5.824 3 7.938l3-2.647z"></path>
-                    </svg>
-                    Generating...
-                </div>
-            </button>
-        </div>
-        
-        <div id="messageBox" class="mt-6 hidden p-4 rounded-xl text-sm text-white text-center font-medium"></div>
+        <div class="mt-8 flex flex-col sm:flex-row space-y-4 sm:space-y-0 sm:space-x-4">
+            <button id="generateBtn" class="flex-1 w-full px-6 py-4 border border-transparent text-base font-semibold rounded-full shadow-lg text-white bg-blue-600 hover:bg-blue-700 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-blue-500 transition-colors duration-300">
+                <span id="buttonText">Generate Balasan</span>
+                <div id="loadingIndicator" class="hidden flex items-center justify-center">
+                    <svg class="animate-spin h-5 w-5 text-white mr-3" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24">
+                        <circle class="opacity-25" cx="12" cy="12" r="10" stroke="currentColor" stroke-width="4"></circle>
+                        <path class="opacity-75" fill="currentColor" d="M4 12a8 8 0 018-8V0C5.373 0 0 5.373 0 12h4zm2 5.291A7.962 7.962 0 014 12H0c0 3.042 1.135 5.824 3 7.938l3-2.647z"></path>
+                    </svg>
+                    Generating...
+                </div>
+            </button>
+        </div>
+        
+        <div id="messageBox" class="mt-6 hidden p-4 rounded-xl text-sm text-white text-center font-medium"></div>
 
-        <div id="outputContainer" class="mt-8 hidden">
-            <label id="replyLabel" class="block text-sm font-semibold text-gray-800">Balasan Email yang Dihasilkan</label>
-            <div class="flex space-x-2 mt-2">
-                <button id="tab1" class="tab-button flex-1 px-4 py-2 rounded-xl text-sm font-medium border border-gray-300 transition-colors duration-200">Alternatif 1</button>
-                <button id="tab2" class="tab-button flex-1 px-4 py-2 rounded-xl text-sm font-medium border border-gray-300 transition-colors duration-200">Alternatif 2</button>
-                <button id="tab3" class="tab-button flex-1 px-4 py-2 rounded-xl text-sm font-medium border border-gray-300 transition-colors duration-200">Alternatif 3</button>
-            </div>
-            <textarea id="generatedReply" rows="8" class="mt-4 block w-full rounded-xl border-2 border-gray-300 bg-gray-100 shadow-inner p-3 transition-all duration-300" readonly></textarea>
-            <button id="copyBtn" class="w-full mt-4 px-6 py-4 border border-transparent text-base font-semibold rounded-full shadow-lg text-white bg-gray-600 hover:bg-gray-700 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-gray-500 transition-colors duration-300">
-                Salin Balasan
-            </button>
-        </div>
+        <div id="outputContainer" class="mt-8 hidden">
+            <label id="replyLabel" class="block text-sm font-semibold text-gray-800">Balasan Email yang Dihasilkan</label>
+            <div class="flex space-x-2 mt-2">
+                <button id="tab1" class="tab-button flex-1 px-4 py-2 rounded-xl text-sm font-medium border border-gray-300 transition-colors duration-200">Alternatif 1</button>
+                <button id="tab2" class="tab-button flex-1 px-4 py-2 rounded-xl text-sm font-medium border border-gray-300 transition-colors duration-200">Alternatif 2</button>
+                <button id="tab3" class="tab-button flex-1 px-4 py-2 rounded-xl text-sm font-medium border border-gray-300 transition-colors duration-200">Alternatif 3</button>
+            </div>
+            <textarea id="generatedReply" rows="8" class="mt-4 block w-full rounded-xl border-2 border-gray-300 bg-gray-100 shadow-inner p-3 transition-all duration-300" readonly></textarea>
+            <button id="copyBtn" class="w-full mt-4 px-6 py-4 border border-transparent text-base font-semibold rounded-full shadow-lg text-white bg-gray-600 hover:bg-gray-700 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-gray-500 transition-colors duration-300">
+                Salin Balasan
+            </button>
+        </div>
 
-    </div>
+    </div>
 
-    <script>
-        const generateBtn = document.getElementById('generateBtn');
-        const copyBtn = document.getElementById('copyBtn');
-        const languageSelect = document.getElementById('languageSelect');
-        const mindsetTextarea = document.getElementById('mindsetTextarea');
-        const emailContentTextarea = document.getElementById('emailContent');
-        const generatedReplyTextarea = document.getElementById('generatedReply');
-        const outputContainer = document.getElementById('outputContainer');
-        const loadingIndicator = document.getElementById('loadingIndicator');
-        const buttonText = document.getElementById('buttonText');
-        const messageBox = document.getElementById('messageBox');
-        const bodyElement = document.body;
-        const logoElement = document.getElementById('logo');
-        const tabs = [document.getElementById('tab1'), document.getElementById('tab2'), document.getElementById('tab3')];
+    <script>
+        const generateBtn = document.getElementById('generateBtn');
+        const copyBtn = document.getElementById('copyBtn');
+        const languageSelect = document.getElementById('languageSelect');
+        const mindsetTextarea = document.getElementById('mindsetTextarea');
+        const emailContentTextarea = document.getElementById('emailContent');
+        const generatedReplyTextarea = document.getElementById('generatedReply');
+        const outputContainer = document.getElementById('outputContainer');
+        const loadingIndicator = document.getElementById('loadingIndicator');
+        const buttonText = document.getElementById('buttonText');
+        const messageBox = document.getElementById('messageBox');
+        const bodyElement = document.body;
+        const logoElement = document.getElementById('logo');
+        const tabs = [document.getElementById('tab1'), document.getElementById('tab2'), document.getElementById('tab3')];
 
-        let isHarjara = true;
-        let isMilan = true;
-        let generatedReplies = [];
+        let isHarjara = true;
+        let isMilan = true;
+        let generatedReplies = [];
 
-        const translations = {
-            indonesian: {
-                appSubtitle: 'Solusi Balasan Email dengan Model AI',
-                mindsetLabel: 'Instruksi Khusus untuk Balasan (Opsional)',
-                mindsetPlaceholder: 'Contoh: "Buat balasannya dengan nada persuasif dan berikan penawaran khusus."',
-                contentLabel: 'Konten Email',
-                contentPlaceholder: 'Tempelkan email yang diterima di sini untuk dianalisis AI...',
-                generateButton: 'Generate Balasan',
-                copyButton: 'Salin Balasan',
-                replyLabel: 'Balasan Email yang Dihasilkan',
-                tab1: 'Alternatif 1',
-                tab2: 'Alternatif 2',
-                tab3: 'Alternatif 3',
-                loading: 'Generating...',
-                messageSuccess: 'Balasan email berhasil dibuat!',
-                messageCopied: 'Balasan disalin ke clipboard!',
-                messageEmpty: 'Tidak ada balasan untuk disalin.',
-                messageError: 'Mohon isi kolom Konten Email untuk memulai.',
-                messageApiError: 'Gagal menghasilkan balasan. Mohon coba lagi.',
-                messageServerError: 'Terjadi kesalahan saat menghubungi server. Mohon coba lagi.'
-            },
-            english: {
-                appSubtitle: 'AI Model Email Reply Solution',
-                mindsetLabel: 'Special Instructions for Reply (Optional)',
-                mindsetPlaceholder: 'Example: "Make the reply persuasive and include a special offer."',
-                contentLabel: 'Email Content',
-                contentPlaceholder: 'Paste the received email here for AI analysis...',
-                generateButton: 'Generate Reply',
-                copyButton: 'Copy Reply',
-                replyLabel: 'Generated Email Reply',
-                tab1: 'Alternative 1',
-                tab2: 'Alternative 2',
-                tab3: 'Alternative 3',
-                loading: 'Generating...',
-                messageSuccess: 'Email reply generated successfully!',
-                messageCopied: 'Reply copied to clipboard!',
-                messageEmpty: 'No reply to copy.',
-                messageError: 'Please fill in the Email Content field to get started.',
-                messageApiError: 'Failed to generate a reply. Please try again.',
-                messageServerError: 'An error occurred while contacting the server. Please try again.'
-            }
-        };
+        const translations = {
+            indonesian: {
+                appSubtitle: 'Solusi Balasan Email dengan Model AI',
+                mindsetLabel: 'Instruksi Khusus untuk Balasan (Opsional)',
+                mindsetPlaceholder: 'Contoh: "Buat balasannya dengan nada persuasif dan berikan penawaran khusus."',
+                contentLabel: 'Konten Email',
+                contentPlaceholder: 'Tempelkan email yang diterima di sini untuk dianalisis AI...',
+                generateButton: 'Generate Balasan',
+                copyButton: 'Salin Balasan',
+                replyLabel: 'Balasan Email yang Dihasilkan',
+                tab1: 'Alternatif 1',
+                tab2: 'Alternatif 2',
+                tab3: 'Alternatif 3',
+                loading: 'Generating...',
+                messageSuccess: 'Balasan email berhasil dibuat!',
+                messageCopied: 'Balasan disalin ke clipboard!',
+                messageEmpty: 'Tidak ada balasan untuk disalin.',
+                messageError: 'Mohon isi kolom Konten Email untuk memulai.',
+                messageApiError: 'Gagal menghasilkan balasan. Mohon coba lagi.',
+                messageServerError: 'Terjadi kesalahan saat menghubungi server. Mohon coba lagi.'
+            },
+            english: {
+                appSubtitle: 'AI Model Email Reply Solution',
+                mindsetLabel: 'Special Instructions for Reply (Optional)',
+                mindsetPlaceholder: 'Example: "Make the reply persuasive and include a special offer."',
+                contentLabel: 'Email Content',
+                contentPlaceholder: 'Paste the received email here for AI analysis...',
+                generateButton: 'Generate Reply',
+                copyButton: 'Copy Reply',
+                replyLabel: 'Generated Email Reply',
+                tab1: 'Alternative 1',
+                tab2: 'Alternative 2',
+                tab3: 'Alternative 3',
+                loading: 'Generating...',
+                messageSuccess: 'Email reply generated successfully!',
+                messageCopied: 'Reply copied to clipboard!',
+                messageEmpty: 'No reply to copy.',
+                messageError: 'Please fill in the Email Content field to get started.',
+                messageApiError: 'Failed to generate a reply. Please try again.',
+                messageServerError: 'An error occurred while contacting the server. Please try again.'
+            }
+        };
 
-        // Function to update UI text based on language
-        function updateUI(lang) {
-            const t = translations[lang];
-            document.getElementById('appSubtitle').textContent = t.appSubtitle;
-            document.getElementById('mindsetLabel').textContent = t.mindsetLabel;
-            mindsetTextarea.placeholder = t.mindsetPlaceholder;
-            document.getElementById('contentLabel').innerHTML = `${t.contentLabel} <span class="text-red-500 font-bold ml-1">*</span>`;
-            emailContentTextarea.placeholder = t.contentPlaceholder;
-            document.getElementById('buttonText').textContent = t.generateButton;
-            document.getElementById('copyBtn').textContent = t.copyButton;
-            document.getElementById('replyLabel').textContent = t.replyLabel;
-            tabs[0].textContent = t.tab1;
-            tabs[1].textContent = t.tab2;
-            tabs[2].textContent = t.tab3;
-        }
+        // Function to update UI text based on language
+        function updateUI(lang) {
+            const t = translations[lang];
+            document.getElementById('appSubtitle').textContent = t.appSubtitle;
+            document.getElementById('mindsetLabel').textContent = t.mindsetLabel;
+            mindsetTextarea.placeholder = t.mindsetPlaceholder;
+            document.getElementById('contentLabel').innerHTML = `${t.contentLabel} <span class="text-red-500 font-bold ml-1">*</span>`;
+            emailContentTextarea.placeholder = t.contentPlaceholder;
+            document.getElementById('buttonText').textContent = t.generateButton;
+            document.getElementById('copyBtn').textContent = t.copyButton;
+            document.getElementById('replyLabel').textContent = t.replyLabel;
+            tabs[0].textContent = t.tab1;
+            tabs[1].textContent = t.tab2;
+            tabs[2].textContent = t.tab3;
+        }
 
-        // Initial UI update
-        updateUI(languageSelect.value);
+        // Initial UI update
+        updateUI(languageSelect.value);
 
-        // Language change event
-        languageSelect.addEventListener('change', (e) => {
-            updateUI(e.target.value);
-        });
+        // Language change event
+        languageSelect.addEventListener('change', (e) => {
+            updateUI(e.target.value);
+        });
 
-        // Function to show a temporary message
-        function showMessage(textKey, isError = false) {
-            const lang = languageSelect.value;
-            messageBox.textContent = translations[lang][textKey];
-            messageBox.className = `mt-6 block p-4 rounded-xl text-sm text-white text-center font-medium ${isError ? 'bg-red-500' : 'bg-green-500'}`;
-            messageBox.classList.remove('hidden');
-            setTimeout(() => {
-                messageBox.classList.add('hidden');
-            }, 3000);
-        }
+        // Function to show a temporary message
+        function showMessage(textKey, isError = false) {
+            const lang = languageSelect.value;
+            messageBox.textContent = translations[lang][textKey];
+            messageBox.className = `mt-6 block p-4 rounded-xl text-sm text-white text-center font-medium ${isError ? 'bg-red-500' : 'bg-green-500'}`;
+            messageBox.classList.remove('hidden');
+            setTimeout(() => {
+                messageBox.classList.add('hidden');
+            }, 3000);
+        }
 
-        // Function to handle image and color rotation
-        function rotateBackgroundAndLogo() {
-            // Rotate background image
-            if (isHarjara) {
-                bodyElement.classList.remove('bg-acmilan');
-                bodyElement.classList.add('bg-liverpool');
-                isHarjara = false;
-            } else {
-                bodyElement.classList.remove('bg-liverpool');
-                bodyElement.classList.add('bg-acmilan');
-                isHarjara = true;
-            }
+        // Function to handle image and color rotation
+        function rotateBackgroundAndLogo() {
+            // Rotate background image
+            if (isHarjara) {
+                bodyElement.classList.remove('bg-acmilan');
+                bodyElement.classList.add('bg-liverpool');
+                isHarjara = false;
+            } else {
+                bodyElement.classList.remove('bg-liverpool');
+                bodyElement.classList.add('bg-acmilan');
+                isHarjara = true;
+            }
 
-            // Change logo colors
-            const logoPaths = logoElement.querySelectorAll('path, circle');
-            if (isMilan) {
-                logoPaths.forEach(path => {
-                    if (path.tagName === 'circle') {
-                        path.setAttribute('fill', '#C8102E'); // Liverpool red
-                    }
-                    path.setAttribute('stroke', '#FFF'); // Liverpool white
-                });
-                isMilan = false;
-            } else {
-                logoPaths.forEach(path => {
-                    if (path.tagName === 'circle') {
-                        path.setAttribute('fill', '#E20021'); // AC Milan red
-                    }
-                    path.setAttribute('stroke', '#1F2937'); // AC Milan black
-                });
-                isMilan = true;
-            }
-        }
+            // Change logo colors
+            const logoPaths = logoElement.querySelectorAll('path, circle');
+            if (isMilan) {
+                logoPaths.forEach(path => {
+                    if (path.tagName === 'circle') {
+                        path.setAttribute('fill', '#C8102E'); // Liverpool red
+                    }
+                    path.setAttribute('stroke', '#FFF'); // Liverpool white
+                });
+                isMilan = false;
+            } else {
+                logoPaths.forEach(path => {
+                    if (path.tagName === 'circle') {
+                        path.setAttribute('fill', '#E20021'); // AC Milan red
+                    }
+                    path.setAttribute('stroke', '#1F2937'); // AC Milan black
+                });
+                isMilan = true;
+            }
+        }
 
-        // Tab click event
-        tabs.forEach((tab, index) => {
-            tab.addEventListener('click', () => {
-                if (generatedReplies.length > index) {
-                    tabs.forEach(t => t.classList.remove('active', 'bg-blue-600', 'text-white', 'text-gray-700'));
-                    tab.classList.add('active', 'bg-blue-600', 'text-white');
-                    generatedReplyTextarea.value = generatedReplies[index];
-                }
-            });
-        });
+        // Tab click event
+        tabs.forEach((tab, index) => {
+            tab.addEventListener('click', () => {
+                if (generatedReplies.length > index) {
+                    tabs.forEach(t => t.classList.remove('active', 'bg-blue-600', 'text-white', 'text-gray-700'));
+                    tab.classList.add('active', 'bg-blue-600', 'text-white');
+                    generatedReplyTextarea.value = generatedReplies[index];
+                }
+            });
+        });
 
-        // Generate button click event
-        generateBtn.addEventListener('click', async () => {
-            const content = emailContentTextarea.value;
-            const language = languageSelect.value;
-            const additionalInstructions = mindsetTextarea.value.trim();
+        // Generate button click event
+        generateBtn.addEventListener('click', async () => {
+            const content = emailContentTextarea.value;
+            const language = languageSelect.value;
+            const additionalInstructions = mindsetTextarea.value.trim();
 
-            if (!content) {
-                showMessage('messageError', true);
-                return;
-            }
-            
-            buttonText.classList.add('hidden');
-            loadingIndicator.classList.remove('hidden');
-            generateBtn.disabled = true;
+            if (!content) {
+                showMessage('messageError', true);
+                return;
+            }
+            
+            buttonText.classList.add('hidden');
+            loadingIndicator.classList.remove('hidden');
+            generateBtn.disabled = true;
 
-            let promptBase;
-            if (additionalInstructions) {
-                promptBase = language === 'english'
-                    ? `Generate 3 distinct email replies in English based on the following content and instructions. Instructions: ${additionalInstructions}. Ensure the replies are direct and concise, and present each one as a separate paragraph without any introductory text.`
-                    : `Hasilkan 3 balasan email yang berbeda dan terpisah dalam Bahasa Indonesia berdasarkan konten berikut dan instruksi tambahan. Instruksi: ${additionalInstructions}. Pastikan balasannya ringkas dan langsung, dan sajikan setiap balasan sebagai paragraf terpisah tanpa teks pengantar.`;
-            } else {
-                promptBase = language === 'english'
-                    ? `Generate 3 distinct email replies in English based on the following content. Ensure the replies are direct and concise, and present each one as a separate paragraph without any introductory text.`
-                    : `Hasilkan 3 balasan email yang berbeda dan terpisah dalam Bahasa Indonesia berdasarkan konten berikut. Pastikan balasannya ringkas dan langsung, dan sajikan setiap balasan sebagai paragraf terpisah tanpa teks pengantar.`;
-            }
-            
-            const payload = {
-                contents: [{ parts: [{ text: `${promptBase}\n\n${content}` }] }],
-            };
-            
-            // Masukkan kunci API Anda di sini jika meng-hosting file sendiri
-            const apiKey = "AIzaSyAOd2aALgDq7oN4vape_AJSLqo9sbwDNj0";
-            const apiUrl = `https://generativelanguage.googleapis.com/v1beta/models/gemini-2.5-flash-preview-05-20:generateContent?key=${apiKey}`;
+            let promptBase;
+            if (additionalInstructions) {
+                promptBase = language === 'english'
+                    ? `Generate 3 distinct email replies in English based on the following content and instructions. Instructions: ${additionalInstructions}. Ensure the replies are direct and concise, and present each one as a separate paragraph without any introductory text.`
+                    : `Hasilkan 3 balasan email yang berbeda dan terpisah dalam Bahasa Indonesia berdasarkan konten berikut dan instruksi tambahan. Instruksi: ${additionalInstructions}. Pastikan balasannya ringkas dan langsung, dan sajikan setiap balasan sebagai paragraf terpisah tanpa teks pengantar.`;
+            } else {
+                promptBase = language === 'english'
+                    ? `Generate 3 distinct email replies in English based on the following content. Ensure the replies are direct and concise, and present each one as a separate paragraph without any introductory text.`
+                    : `Hasilkan 3 balasan email yang berbeda dan terpisah dalam Bahasa Indonesia berdasarkan konten berikut. Pastikan balasannya ringkas dan langsung, dan sajikan setiap balasan sebagai paragraf terpisah tanpa teks pengantar.`;
+            }
+            
+            const payload = {
+                contents: [{ parts: [{ text: `${promptBase}\n\n${content}` }] }],
+            };
+            
+            // Masukkan kunci API Anda di sini jika meng-hosting file sendiri
+            // Untuk Canvas, biarkan string kosong seperti ini.
+            const apiKey = "AIzaSyAOd2aALgDq7oN4vape_AJSLqo9sbwDNj0";
+            const apiUrl = `https://generativelanguage.googleapis.com/v1beta/models/gemini-2.5-flash-preview-05-20:generateContent?key=${apiKey}`;
 
-            let retryCount = 0;
-            const maxRetries = 3;
-            const delay = 1000;
+            let retryCount = 0;
+            const maxRetries = 3;
+            const delay = 1000;
 
-            const makeApiCall = async () => {
-                try {
-                    const response = await fetch(apiUrl, {
-                        method: 'POST',
-                        headers: { 'Content-Type': 'application/json' },
-                        body: JSON.stringify(payload)
-                    });
+            const makeApiCall = async () => {
+                try {
+                    const response = await fetch(apiUrl, {
+                        method: 'POST',
+                        headers: { 'Content-Type': 'application/json' },
+                        body: JSON.stringify(payload)
+                    });
 
-                    if (!response.ok) {
-                        throw new Error(`HTTP error! status: ${response.status}`);
-                    }
+                    if (!response.ok) {
+                        throw new Error(`HTTP error! status: ${response.status}`);
+                    }
 
-                    const result = await response.json();
-                    const generatedText = result?.candidates?.[0]?.content?.parts?.[0]?.text;
+                    const result = await response.json();
+                    const generatedText = result?.candidates?.[0]?.content?.parts?.[0]?.text;
 
-                    if (generatedText) {
-                        generatedReplies = generatedText.split(/\r?\n\s*\r?\n/).filter(text => text.trim() !== '');
-                        if (generatedReplies.length > 0) {
-                            tabs.forEach((tab, index) => tab.style.display = 'block');
-                            generatedReplyTextarea.value = generatedReplies[0];
-                            tabs[0].click();
-                        }
-                        outputContainer.classList.remove('hidden');
-                        showMessage('messageSuccess');
-                        rotateBackgroundAndLogo();
-                    } else {
-                        showMessage('messageApiError', true);
-                    }
-                } catch (error) {
-                    console.error('API call failed:', error);
-                    if (retryCount < maxRetries) {
-                        retryCount++;
-                        setTimeout(() => makeApiCall(), delay * Math.pow(2, retryCount));
-                    } else {
-                        showMessage('messageServerError', true);
-                    }
-                } finally {
-                    loadingIndicator.classList.add('hidden');
-                    buttonText.classList.remove('hidden');
-                    generateBtn.disabled = false;
-                }
-            };
-            
-            makeApiCall();
-        });
+                    if (generatedText) {
+                        generatedReplies = generatedText.split(/\r?\n\s*\r?\n/).filter(text => text.trim() !== '');
+                        if (generatedReplies.length > 0) {
+                            tabs.forEach((tab, index) => tab.style.display = 'block');
+                            generatedReplyTextarea.value = generatedReplies[0];
+                            tabs[0].click();
+                        }
+                        outputContainer.classList.remove('hidden');
+                        showMessage('messageSuccess');
+                        rotateBackgroundAndLogo();
+                    } else {
+                        showMessage('messageApiError', true);
+                    }
+                } catch (error) {
+                    console.error('API call failed:', error);
+                    if (retryCount < maxRetries) {
+                        retryCount++;
+                        setTimeout(() => makeApiCall(), delay * Math.pow(2, retryCount));
+                    } else {
+                        showMessage('messageServerError', true);
+                    }
+                } finally {
+                    loadingIndicator.classList.add('hidden');
+                    buttonText.classList.remove('hidden');
+                    generateBtn.disabled = false;
+                }
+            };
+            
+            makeApiCall();
+        });
 
-        // Copy button click event
-        copyBtn.addEventListener('click', () => {
-            if (generatedReplyTextarea.value) {
-                generatedReplyTextarea.select();
-                generatedReplyTextarea.setSelectionRange(0, 99999); /* For mobile devices */
-                document.execCommand('copy');
-                showMessage('messageCopied');
-            } else {
-                showMessage('messageEmpty', true);
-            }
-        });
-    </script>
+        // Copy button click event
+        copyBtn.addEventListener('click', () => {
+            if (generatedReplyTextarea.value) {
+                generatedReplyTextarea.select();
+                generatedReplyTextarea.setSelectionRange(0, 99999); /* For mobile devices */
+                document.execCommand('copy');
+                showMessage('messageCopied');
+            } else {
+                showMessage('messageEmpty', true);
+            }
+        });
+    </script>
 </body>
 </html>
-
